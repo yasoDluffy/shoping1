@@ -1,0 +1,18 @@
+.box {
+  border: 1px blue solid;
+  background-color: aqua;
+  text-align: center;
+}
+
+.img {
+  width: 400px;
+  height: 300px;
+}
+
+.card {
+  padding: 20px;
+  margin: 20px;
+  border: 1px blue solid;
+  border-radius: 20px;
+  background-color: gray;
+}
