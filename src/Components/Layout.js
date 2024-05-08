@@ -5,9 +5,12 @@ import Footer from "./Footer";
 const Layout = (props) => {
   return (
     <div>
+      
+      <div style={{backgroundColor: "#ECECEC"}}>
       <Navbar />
       {props.children}
       <Footer />
+      </div>
     </div>
   );
 };

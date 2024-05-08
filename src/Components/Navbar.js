@@ -3,12 +3,12 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="container-fluid">
-      <nav className="navbar navbar-expand-lg bg-warning">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+    <div className="container-fluid ">
+      <nav className="navbar navbar-expand-lg bg-secondary ">
+        <div className="container-fluid ">
+          <NavLink to="/" className="nav-link navbar-brand" style={{fontSize:"22px", fontWeight:"bold"}}>
             My Store
-          </a>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -23,27 +23,32 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link">
+                <NavLink to="/" className="nav-link text-white" style={{fontSize:"18px", fontWeight:"bold"}}>
                   Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/products" className="nav-link">
+                <NavLink to="/products" className="nav-link text-white" style={{fontSize:"18px", fontWeight:"bold"}}>
                   Products
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/cart" className="nav-link">
+                <NavLink to="/categories" className="nav-link text-white" style={{fontSize:"18px", fontWeight:"bold"}}>
+                  Categories
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/cart" className="nav-link text-white" style={{fontSize:"18px", fontWeight:"bold"}}>
                   Cart
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/fav" className="nav-link">
+                <NavLink to="/fav" className="nav-link text-white" style={{fontSize:"18px", fontWeight:"bold"}}>
                   Favorites
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/about" className="nav-link">
+                <NavLink to="/about" className="nav-link text-white" style={{fontSize:"18px", fontWeight:"bold"}}>
                   About Us
                 </NavLink>
               </li>

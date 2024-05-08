@@ -14,7 +14,7 @@ const Cart = () => {
               const currProduct = products.filter(
                 (product) => product.id === id
               )[0];
-              return <Product product={currProduct} />;
+              return <Product product={currProduct} fromCart={true} />;
             })}
           </div>
         </div>

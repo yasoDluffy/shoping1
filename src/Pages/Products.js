@@ -9,8 +9,8 @@ const Products = () => {
   return (
     <div>
       <Layout>
-        <div class="container mt-5">
-          <div class="row">
+        <div className="container mt-5">
+          <div className="row">
             {products.map((el, index) =>
               index + 1 <= numOfProducts ? <Product product={el} /> : ""
             )}

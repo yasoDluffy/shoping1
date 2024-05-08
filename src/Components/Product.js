@@ -2,9 +2,17 @@ import React, { useContext } from "react";
 import GlobalContext from "../Hooks/GlobalContext";
 import { NavLink } from "react-router-dom";
 
-const Product = ({ product }) => {
+const Product = ({ product, fromCart, fromFav }) => {
   const { itemsInCart, setItemsInCart, itemsInFav, setItemsInFav } =
     useContext(GlobalContext);
+
+    const deleteFromCart = (id)=>{
+      setItemsInCart(itemsInCart.filter((el)=> el !== id));
+    };
+    
+    const deleteFromFav =(id)=>{
+      setItemsInFav(itemsInFav.filter((el)=> el !== id));
+    };
 
   return (
     <div className="col-lg-4 col-md-6 col-sm-12 text-center">
@@ -34,18 +42,38 @@ const Product = ({ product }) => {
             ).toFixed(2)}
           </h5>
           <p></p>
+          {!fromCart ? (
           <button
             className="btn btn-success"
             onClick={() => setItemsInCart([...itemsInCart, product.id])}
           >
             🛒
           </button>
+          ) : (
+            <button
+            className="btn btn-success"
+            onClick={() => deleteFromCart(product.id)}
+          >
+            ❌
+          </button>
+          )}
+           
+          {!fromFav ? (
           <button
             className="btn btn-info"
             onClick={() => setItemsInFav([...itemsInFav, product.id])}
           >
             ❤️
           </button>
+         ) : (
+
+         <button
+            className="btn btn-info"
+            onClick={() =>  deleteFromFav(product.id)}
+          >
+            ❌
+          </button>
+          )}
         </div>
       </div>
     </div>
