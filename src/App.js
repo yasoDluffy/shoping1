@@ -51,7 +51,7 @@ function App() {
   const IncreaseNumOfProducts = () => setNumOfProducts(numOfProducts + 20);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/?limit=1000")
+    fetch("https://dummyjson.com/products/?limit=1")
       .then((res) => res.json())
       .then((json) => setProducts(json.products));
   }, []);
