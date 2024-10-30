@@ -1,0 +1,10 @@
+{
+	"serverRequests": [
+		{ "requestType": "POST", "action": "new-product", "date": "2024-10-30T09:58:51.562Z" },
+		{ "requestType": "GET", "action": "get-product-by-id", "date": "2024-10-30T10:00:27.663Z" },
+		{ "requestType": "GET", "action": "get-products-by-limit", "date": "2024-10-30T10:02:08.815Z" },
+		{ "requestType": "GET", "action": "get-products-by-limit", "date": "2024-10-30T10:02:34.352Z" },
+		{ "requestType": "PUT", "action": "update-product-by-id", "date": "2024-10-30T10:03:03.644Z" },
+		{ "requestType": "DELETE", "action": "delete-product-by-id-add-to-archive", "date": "2024-10-30T10:03:40.146Z" }
+	]
+}
