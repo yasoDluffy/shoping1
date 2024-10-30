@@ -48,7 +48,7 @@ app.put('/product/:id', (req, res) => {
 
     res.json(req.body);
 });
-
+//למחוק
 app.delete('/product/:id', (req, res) => {
     products = products.filter(product => product.id != req.params.id)
     res.json();
