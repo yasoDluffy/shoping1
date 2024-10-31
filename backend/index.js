@@ -1,6 +1,14 @@
+
 const express = require('express');
+const jwt = require('jsonwebtoken');
+
 const StorageService = require('./storage-service');
 const LogsService = require('./logs-service');
+
+const authenticateJWT = require('./authentication/middlewares');
+const initPassport = require('./authentication/passport-init');
+
+require('dotenv').config()
 
 const storageService = new StorageService();
 const logsService = new LogsService();
@@ -9,7 +17,28 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/new-product', async (req, res) => {
+const JWT_SECRET = process.env.JWT_SECRET
+
+app.use(initPassport());
+
+//endpoint to authenticate user and send a JWT token if the user is valid
+app.post('/login', async (req, res) => {
+    const users = (await storageService.readData('users-db.json')).users;
+    const user = users.find(u => u.username === req.body.username && u.password === req.body.password);
+
+    if (user) {
+        const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
+        logsService.writeLogs('POST', 'user-login');
+        res.json({ message: 'User logged in successfully', token: token });
+    } else {
+        res.status(401).json({ error: 'Invalid username or password' });
+    }
+});
+
+
+//endpoints to manage products
+//all endpoints are protected with JWT token with midleware 
+app.post('/new-product', authenticateJWT, async (req, res) => {
     const productsToSave = req.body.products;
 
     const products = (await storageService.readData('db.json')).products;
@@ -23,7 +52,7 @@ app.post('/new-product', async (req, res) => {
     res.json();
 });
 
-app.get('/product/:id', async (req, res) => {
+app.get('/product/:id', authenticateJWT, async (req, res) => {
 
     const products = (await storageService.readData('db.json')).products;
 
@@ -38,7 +67,7 @@ app.get('/product/:id', async (req, res) => {
     res.json(product);
 });
 
-app.get('/products/:limit?', async (req, res) => {
+app.get('/products/:limit?', authenticateJWT, async (req, res) => {
 
     logsService.writeLogs('GET', 'get-products-by-limit');
 
@@ -55,7 +84,7 @@ app.get('/products/:limit?', async (req, res) => {
     res.json(limitedProducts);
 })
 
-app.put('/product/:id', async (req, res) => {
+app.put('/product/:id', authenticateJWT, async (req, res) => {
 
     const products = (await storageService.readData('db.json')).products;
 
@@ -74,7 +103,7 @@ app.put('/product/:id', async (req, res) => {
     res.json(req.body);
 });
 
-app.delete('/product/:id', async (req, res) => {
+app.delete('/product/:id',authenticateJWT, async (req, res) => {
 
     const products = (await storageService.readData('db.json')).products;
 
