@@ -38,8 +38,12 @@ app.post('/login', async (req, res) => {
 
 //endpoints to manage products
 //all endpoints are protected with JWT token with midleware 
-app.post('/new-product', authenticateJWT, async (req, res) => {
+app.post('/new-products', authenticateJWT, async (req, res) => {
     const productsToSave = req.body.products;
+
+    if(!productsToSave.every(product => validateProductData(product))) {
+        return res.status(400).json({ error: 'Product Data Not Valid' });
+    }
 
     const products = (await storageService.readData('db.json')).products;
 
@@ -85,8 +89,11 @@ app.get('/products/:limit?', authenticateJWT, async (req, res) => {
 })
 
 app.put('/product/:id', authenticateJWT, async (req, res) => {
-
     const products = (await storageService.readData('db.json')).products;
+
+    if(!products.some(p => p.id == req.params.id) || !validateProductData(req.body)) {
+        return res.status(404).json({ error: 'Product Data Not Valid' });
+    }
 
     const updatedProducts = products.map(product => {
         if (product.id == req.params.id) {
@@ -132,3 +139,14 @@ app.delete('/product/:id',authenticateJWT, async (req, res) => {
 app.listen(8080, () => {
     console.log(`Server is running at http://localhost:8080`);
 });
+
+
+
+ //check that the product being updated is valid
+ function validateProductData(product) {
+    if (!product?.id || !product?.title || !product?.discount || !product?.price || !product?.rating || !product?.brand || !product?.category) {
+        return false
+    }
+
+    return true
+}

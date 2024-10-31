@@ -1,10 +1,1 @@
-{
-	"serverRequests": [
-		{ "requestType": "POST", "action": "new-product", "date": "2024-10-30T09:58:51.562Z" },
-		{ "requestType": "GET", "action": "get-product-by-id", "date": "2024-10-30T10:00:27.663Z" },
-		{ "requestType": "GET", "action": "get-products-by-limit", "date": "2024-10-30T10:02:08.815Z" },
-		{ "requestType": "GET", "action": "get-products-by-limit", "date": "2024-10-30T10:02:34.352Z" },
-		{ "requestType": "PUT", "action": "update-product-by-id", "date": "2024-10-30T10:03:03.644Z" },
-		{ "requestType": "DELETE", "action": "delete-product-by-id-add-to-archive", "date": "2024-10-30T10:03:40.146Z" }
-	]
-}
+{"serverRequests":[{"requestType":"POST","action":"new-product","date":"2024-10-30T09:58:51.562Z"},{"requestType":"GET","action":"get-product-by-id","date":"2024-10-30T10:00:27.663Z"},{"requestType":"GET","action":"get-products-by-limit","date":"2024-10-30T10:02:08.815Z"},{"requestType":"GET","action":"get-products-by-limit","date":"2024-10-30T10:02:34.352Z"},{"requestType":"PUT","action":"update-product-by-id","date":"2024-10-30T10:03:03.644Z"},{"requestType":"DELETE","action":"delete-product-by-id-add-to-archive","date":"2024-10-30T10:03:40.146Z"},{"requestType":"PUT","action":"update-product-by-id","date":"2024-10-31T16:54:43.459Z"},{"requestType":"GET","action":"get-products-by-limit","date":"2024-10-31T17:18:50.465Z"},{"requestType":"GET","action":"get-products-by-limit","date":"2024-10-31T17:19:09.572Z"},{"requestType":"GET","action":"get-products-by-limit","date":"2024-10-31T17:19:28.618Z"},{"requestType":"GET","action":"get-products-by-limit","date":"2024-10-31T17:19:38.679Z"},{"requestType":"POST","action":"new-product","date":"2024-10-31T17:30:00.125Z"},{"requestType":"POST","action":"new-product","date":"2024-10-31T17:30:59.521Z"}]}
