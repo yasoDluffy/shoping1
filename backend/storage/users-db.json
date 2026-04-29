@@ -1,6 +1,18 @@
 {
-	"users": [
-		{ "id": 1, "username": "user1", "password": "password1" },
-		{ "id": 2, "username": "user2", "password": "password2" }
-	]
+  "users": [
+    { 
+      "id": "ADMIN-1", 
+      "firstName": "Yaso Boss", 
+      "email": "admin@gmail.com", 
+      "password": "123",
+      "cart": []
+    },
+    { 
+      "id": "USR-2", 
+      "firstName": "Israel Israeli", 
+      "email": "user1@gmail.com", 
+      "password": "password1",
+      "cart": []
+    }
+  ]
 }

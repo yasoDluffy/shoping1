@@ -4,6 +4,8 @@ import Products from "./Pages/Products";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import AboutUs from "./Pages/AboutUs";
+import Login from './Pages/Login';
+import Admin from './Pages/Admin';
 import Cart from "./Pages/Cart";
 import Favorites from "./Pages/Favorites";
 import Product from "./Pages/Product";
@@ -51,9 +53,12 @@ function App() {
   const IncreaseNumOfProducts = () => setNumOfProducts(numOfProducts + 20);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/?limit=1")
+    // 1. שינינו את הכתובת לשרת האמיתי שלנו
+    fetch("http://localhost:8080/products/1000")
       .then((res) => res.json())
-      .then((json) => setProducts(json.products));
+      // 2. השרת שלנו שולח את המערך ישירות (בלי json.products), אז שינינו את הניסוח כאן
+      .then((data) => setProducts(data))
+      .catch((err) => console.log("שגיאה במשיכת נתונים מהשרת:", err));
   }, []);
 
   //Local Storage
@@ -61,10 +66,9 @@ function App() {
 
   //קבל פריטים מאחסון מקומי אם קיים, אחרת הגדר את המצב למערך ריק
   const [itemsInCart, setItemsInCart] = useState(
-    JSON.parse(localStorage.getItem("cartItems"))
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : []
-  );
+  JSON.parse(localStorage.getItem("cartItems")) || []
+);
+
   const [itemsInFav, setItemsInFav] = useState(
     JSON.parse(localStorage.getItem("favItems"))
       ? JSON.parse(localStorage.getItem("favItems"))
@@ -101,10 +105,11 @@ function App() {
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/products" element={<Products />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/fav" element={<Favorites />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="/categories" element={<Categories />} />
-            
             <Route path="/product/:id" element={<Product />} />
             <Route path="/category/:id" element={<Category />} />
           </Routes>

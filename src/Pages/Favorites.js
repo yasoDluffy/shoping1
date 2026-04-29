@@ -4,22 +4,38 @@ import Layout from "../Components/Layout";
 import Product from "../Components/Product";
 
 const Favorites = () => {
-  const { itemsInFav, products } = useContext(GlobalContext);
+  const { products, itemsInFav } = useContext(GlobalContext);
+
+  const safeProducts = products || [];
+  
+  // התיקון הקריטי: אנחנו משתמשים ב-Set כדי למחוק כפילויות היסטוריות מהזיכרון
+  const safeFavs = [...new Set(itemsInFav || [])];
+
+  const favoriteProducts = safeFavs.map(id => 
+    safeProducts.find(p => String(p.id) === String(id))
+  ).filter(p => p !== undefined);
+
   return (
-    <div>
-      <Layout>
-        <div class="container mt-5" style={{ minHeight: "70vh" }}>
-          <div class="row">
-            {itemsInFav.map((id) => {
-              const currProduct = products.filter(
-                (product) => product.id === id
-              )[0];
-              return <Product product={currProduct} fromFav={true} />;
-            })}
-          </div>
+    <Layout>
+      <div className="container mt-5" style={{ minHeight: "70vh" }}>
+        <h2 className="text-center mb-5" style={{ fontWeight: 'bold' }}>❤️ Your Favorite Items</h2>
+        
+        <div className="row">
+          {favoriteProducts.length > 0 ? (
+            favoriteProducts.map((product) => (
+              <Product key={product.id} product={product} fromFav={true} />
+            ))
+          ) : (
+            <div className="text-center w-100 mt-5">
+              <h1 style={{ fontSize: '4rem', color: '#ccc' }}>🤍</h1>
+              <h4 className="text-muted mt-3">You haven't added any favorites yet.</h4>
+              <p>Go to the Products page and click the heart icon on items you love!</p>
+            </div>
+          )}
         </div>
-      </Layout>
-    </div>
+        
+      </div>
+    </Layout>
   );
 };
 
